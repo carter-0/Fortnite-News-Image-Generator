@@ -1,6 +1,6 @@
 # Fortnite-News-Image-Generator
 
-generates images of the fnbr news tab from the API
+generates images of the fnbr news tab from the API. direct image available at fnbr.ddns.net/api/news.png
 
 ##  Dependencies
 
@@ -9,3 +9,4 @@ generates images of the fnbr news tab from the API
 - PIL
 - fortnite_api
 - requests
+
