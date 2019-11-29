@@ -1,2 +1,3 @@
 # Fortnite-News-Image-Generator
-idk generates image of fortnite br news 
+
+generates images of the fnbr news tab from the API
