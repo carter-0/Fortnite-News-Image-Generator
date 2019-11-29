@@ -91,7 +91,7 @@ while True: ##loop to check for change. Delay: 500s
 		text_wrap_overlay(1, 723)
 		text_wrap_overlay(2, 1309) ##overlays main body text to template
 
-		os.rename('Temp/output/brNews.png', 'webDir/news.png') ##moves to main directory
+		os.rename('Temp/output/brNews.png', 'final.png') ##moves to main directory
 
 		print('[ALERT] Process Finished') ##Nice
 
