@@ -53,8 +53,6 @@ while True: ##loop to check for change. Delay: 500s
 	with open('/tmp/fnNews/news_old' + '.pkl', 'rb') as f: ##pickle load
 	    news_old = pickle.load(f)
 
-	news_old = 'nice'
-
 	if news_raw != news_old: ##check for updates
 		print('[ALERT] In-game news updated')
 
