@@ -43,6 +43,22 @@ def text_wrap_overlay(bodyNum, posX, yOff=608, outname='Temp/output/brNews.png')
 		watermark_text('Temp/output/brNews.png', outname, line, pos=(posX, yOff))
 		yOff = yOff + 29
 
+try:
+	open('files/font.ttf', 'r').close()
+except FileNotFoundError:
+	print('\nrequired files do not exist.\n Downloading.')
+	os.mkdir('files/')
+	response = requests.get('http://fnbr.ddns.net/downloads/fnNews/font.ttf')
+	if response.status_code == 200:
+		with open("files/font.ttf", 'wb') as f:
+			f.write(response.content)
+	response = requests.get('http://fnbr.ddns.net/downloads/fnNews/template.png')
+	if response.status_code == 200:
+		with open("files/template.png", 'wb') as f:
+			f.write(response.content)
+	print('done.\n')
+
+
 if os.name == 'nt': ##Check for windows or linux
 	print('[WARN] Windows Detected. Switching to windows code')
 	try:
