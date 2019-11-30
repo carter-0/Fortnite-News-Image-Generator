@@ -9,24 +9,24 @@ from PIL import *; from PIL import Image, ImageDraw, ImageFont
 links = []; title = []; body = []; chars = []
 fortnite_client = fortnite_api.FortniteAPI(); news_raw = fortnite_client.news.fetch().br.raw_data ##inititate API
 
-def resize(basewidth, imagein, imageName):
+def resize(basewidth, imagein, imageName): ##to resize the image
 	img = Image.open(imagein)
 	wpercent = (basewidth/float(img.size[0]))
 	hsize = int((float(img.size[1])*float(wpercent)))
 	img = img.resize((basewidth,hsize), Image.LANCZOS)
 	img.save(imageName)
 
-def watermark_text(input_image_path, output_image_path, text, pos, textSize=26, color=(80, 168, 214)):
+def watermark_text(input_image_path, output_image_path, text, pos, textSize=26, color=(80, 168, 214)): ##function to overlay the text onto the image
 	photo = Image.open(input_image_path)
 
 	# make the image editable
 	drawing = ImageDraw.Draw(photo)
 
-	font = ImageFont.truetype("Temp/font.ttf", textSize) ##Big Burbank font used in game
+	font = ImageFont.truetype("Temp/font.ttf", textSize) ##font used in game
 	drawing.text(pos, text, fill=color, font=font, fontsize=5)
 	photo.save(output_image_path)
 
-def watermark_photo(input_image_path,
+def watermark_photo(input_image_path, ##to overlay images onto the main image
 					output_image_path,
 					watermark_image_path,
 					position):
@@ -47,11 +47,14 @@ try:
 except:
 	print('[WARN] /tmp/fnNews already exists. Skipping')
 
-while True: ##loop to check for change. Delay: 500s
+while True: ##loop to check for change. Delay: 100s
 	links = []; title = []; body = []; chars = [] ##resets lists
-	
-	with open('/tmp/fnNews/news_old' + '.pkl', 'rb') as f: ##pickle load
-	    news_old = pickle.load(f)
+
+	try:
+		with open('/tmp/fnNews/news_old' + '.pkl', 'rb') as f: ##pickle load
+			news_old = pickle.load(f)
+	except:
+		print('[WARN] .pkl file doesn\'t exist. Skipping')
 
 	if news_raw != news_old: ##check for updates
 		print('[ALERT] In-game news updated')
@@ -61,7 +64,7 @@ while True: ##loop to check for change. Delay: 500s
 
 		x = 0
 		for i in news_raw['messages']:
-			title.append(news_raw['messages'][x]['title']) ##adds the things to lists
+			title.append(news_raw['messages'][x]['title']) ##adds the data to lists
 			links.append(news_raw['messages'][x]['image'])
 			body.append(news_raw['messages'][x]['body'])
 			x = x + 1
@@ -81,15 +84,15 @@ while True: ##loop to check for change. Delay: 500s
 		watermark_photo('Temp/output/brNews.png', 'Temp/output/brNews.png', 'Temp/newsImage2.jpg', position=(701,289))
 		watermark_photo('Temp/output/brNews.png', 'Temp/output/brNews.png', 'Temp/newsImage3.jpg', position=(1286,289)) ##overlays indervidual 3 images over main template
 
-		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[0], pos=(138, 561), textSize=38, color=(0, 0, 0))
-		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[1], pos=(723, 561), textSize=38, color=(0, 0, 0))
-		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[2], pos=(1309, 561), textSize=38, color=(0, 0, 0)) ##overlays text to template
+		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[0], pos=(124, 561), textSize=38, color=(0, 0, 0))
+		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[1], pos=(709, 561), textSize=38, color=(0, 0, 0))
+		watermark_text('Temp/output/brNews.png', 'Temp/output/brNews.png', title[2], pos=(1295, 561), textSize=38, color=(0, 0, 0)) ##overlays text to template
 
-		text_wrap_overlay(0, 138)
-		text_wrap_overlay(1, 723)
-		text_wrap_overlay(2, 1309) ##overlays main body text to template
+		text_wrap_overlay(0, 124)
+		text_wrap_overlay(1, 709)
+		text_wrap_overlay(2, 1295) ##overlays main body text to template
 
-		os.rename('Temp/output/brNews.png', 'final.png') ##moves to main directory
+		os.rename('Temp/output/brNews.png', 'webDir/news.png') ##moves to main directory
 
 		print('[ALERT] Process Finished') ##Nice
 
@@ -99,4 +102,4 @@ while True: ##loop to check for change. Delay: 500s
 		except:
 			print('[WARN] Cleaning Files Failed') ##this doesn't work most of the time idk why
 	else:
-		time.sleep(500)
+		time.sleep(100)
