@@ -1,6 +1,6 @@
 # Fortnite-News-Image-Generator
 
-generates images of the fnbr news tab from the API. direct image available at https://ca-cdn.xyz/api/news.png. Windows and Linux Support.
+Generates images of the fnbr news tab from the API. direct image available at https://ca-cdn.xyz/api/news.png. Windows and Linux Support.
 
 ##  Dependencies
 
