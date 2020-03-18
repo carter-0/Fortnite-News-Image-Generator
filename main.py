@@ -8,7 +8,7 @@ import fortnite_api
 from PIL import *; from PIL import Image, ImageDraw, ImageFont
 
 links = []; title = []; body = []; chars = []
-fortnite_client = fortnite_api.FortniteAPI(); news_raw = fortnite_client.news.fetch().br.raw_data ##inititate API
+fortnite_client = fortnite_api.FortniteAPI('ba158fdba76459a1c37ff234fd2a34018e511ee99356c621def80559aba52386'); news_raw = fortnite_client.news.fetch().br.raw_data ##inititate API
 
 def resize(basewidth, imagein, imageName): ##to resize the image
 	img = Image.open(imagein)
