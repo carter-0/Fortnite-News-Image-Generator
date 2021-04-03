@@ -1,5 +1,7 @@
 # Fortnite-News-Image-Generator
 
+My first real python project - archiving because the apis used are no longer available. 
+
 Generates images of the fnbr news tab from the API. direct image available at https://ca-cdn.xyz/api/news.png. Windows and Linux Support.
 
 ##  Dependencies
